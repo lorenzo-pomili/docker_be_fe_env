@@ -28,7 +28,7 @@ services:
     command: npm run start
   database:
     build:
-      context: "./database
+      context: ./database
     container_name: 'database'
     restart: 'always'
     ports:
