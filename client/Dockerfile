@@ -4,7 +4,6 @@ RUN mkdir -p /app/FE/src
 WORKDIR /app/FE/src
 
 COPY package.json /app/FE
-COPY package-lock.json /app/FE
 
 RUN npm install
 
