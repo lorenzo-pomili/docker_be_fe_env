@@ -12,7 +12,7 @@ services:
       - ${APP_SERVER_PORT}:${APP_SERVER_PORT}
     volumes:
       - ./server/src:/app/BE/src
-    command: npm run build
+    # command: npm run build
   client:
     build: ./client
     expose:
@@ -25,7 +25,7 @@ services:
       - ./client/src:/app/FE/src
     links:
       - server
-    command: npm start
+  #   command: npm start
   database:
     build:
       context: ./database
