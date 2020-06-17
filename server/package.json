@@ -13,6 +13,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "bs-platform": "7.3.2"
+    "bs-platform": "7.3.2",
+    "mariadb": "2.4.0"
   }
 }

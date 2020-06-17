@@ -1,31 +1,6 @@
 version: "3"
 
 services:
-  server:
-    build: ./server
-    expose:
-      - ${SERVER_PORT}
-    environment:
-      API_HOST: ${API_HOST}
-      APP_SERVER_PORT: ${APP_SERVER_PORT}
-    ports:
-      - ${APP_SERVER_PORT}:${APP_SERVER_PORT}
-    volumes:
-      - ./server/src:/app/BE/src
-    # command: npm run build
-  client:
-    build: ./client
-    expose:
-      - ${FE_APP_PORT}
-    environment:
-      - FE_APP_PORT=${FE_APP_PORT}
-    ports:
-      - ${FE_APP_PORT}:${FE_APP_PORT}
-    volumes:
-      - ./client/src:/app/FE/src
-    links:
-      - server
-  #   command: npm start
   database:
     build:
       context: ./database
@@ -41,3 +16,32 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+  server:
+    build: ./server
+    depends_on:
+      - database
+    expose:
+      - ${SERVER_PORT}
+    environment:
+      API_HOST: ${API_HOST}
+      APP_SERVER_PORT: ${APP_SERVER_PORT}
+    ports:
+      - ${APP_SERVER_PORT}:${APP_SERVER_PORT}
+    volumes:
+      - ./server/src:/app/BE/src
+    # command: npm run build
+    command: node src/test.js
+    # command: node src/Db.bs.js
+  client:
+    build: ./client
+    expose:
+      - ${FE_APP_PORT}
+    environment:
+      - FE_APP_PORT=${FE_APP_PORT}
+    ports:
+      - ${FE_APP_PORT}:${FE_APP_PORT}
+    volumes:
+      - ./client/src:/app/FE/src
+    links:
+      - server
+  #   command: npm start
