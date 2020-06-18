@@ -1,8 +1,8 @@
 type t;
 
-type connection = {query: string => Js.Promise.t(t)};
+type connection = {query: (. string) => Js.Promise.t(t)};
 
-type pool = {getConnection: unit => Js.Promise.t(connection)};
+type pool = {getConnection: (. unit) => Js.Promise.t(connection)};
 
 type host = string;
 type user = string;
@@ -16,10 +16,11 @@ type poolParams = {
   connectionLimit,
 };
 
-[@bs.module "mariadb"] external createPool: poolParams => pool = "createPool";
+[@bs.module "mariadb"]
+external createPool: (. poolParams) => pool = "createPool";
 
 let pool =
-  createPool({
+  createPool(. {
     // host: "127.0.0.1",
     host: "database",
     user: "docker",
@@ -27,8 +28,8 @@ let pool =
     connectionLimit: 5,
   });
 
-pool.getConnection()
-|> Js.Promise.then_(conn => {conn.query("SELECT 1 as val")})
+pool.getConnection(.)
+|> Js.Promise.then_(conn => {conn.query(. "SELECT 1 as val")})
 |> Js.Promise.then_(r => {
      Js.log2("r: ", r);
      Js.Promise.resolve();
