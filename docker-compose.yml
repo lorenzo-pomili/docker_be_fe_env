@@ -31,7 +31,8 @@ services:
       - ./server/src:/app/BE/src
     # command: npm run build
     # command: node src/test.js
-    command: node src/Db.bs.js
+    # command: node src/Db.bs.js
+    command: npm start
   client:
     build: ./client
     expose:

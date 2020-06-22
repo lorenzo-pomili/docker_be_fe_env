@@ -2,10 +2,10 @@
   "name": "docker-env",
   "version": "0.1.0",
   "scripts": {
-    "start": "bsb -make-world -w",
+    "start": "nodemon ./src/Db.bs.js",
     "clean": "bsb -clean-world",
-    "build": "bsb -make-world",
-    "watch": "bsb -make-world -w"
+    "build": "bsb -make-world -w",
+    "single-build": "bsb -make-world"
   },
   "keywords": [
     "BuckleScript"
@@ -14,6 +14,7 @@
   "license": "MIT",
   "devDependencies": {
     "bs-platform": "7.3.2",
-    "mariadb": "2.4.0"
+    "mariadb": "2.4.0",
+    "nodemon": "2.0.4"
   }
 }
